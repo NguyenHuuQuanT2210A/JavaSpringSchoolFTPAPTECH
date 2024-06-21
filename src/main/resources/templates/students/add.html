@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{include/main}">
+<head>
+    <title>Add Students</title>
+</head>
+
+<th:block layout:fragment="body">
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Add Students</h1>
+    <form style="border: 1px solid #dad8d8;border-radius: 5px; max-width: 600px; padding: 30px; margin: 0 auto;flex-direction: column; align-items: center" th:action="@{/students/create}" th:object="${student}" method="post">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" th:field="*{lastName}" class="form-control" id="lastName">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" th:field="*{email}" class="form-control" id="email">
+        </div>
+
+        <div>
+            <label  for="classRoomId">Class Room</label>
+            <select th:field="*{classRoomId}" class="form-select form-select-lg mb-3" id="classRoomId"  aria-label=".form-select-lg example">
+                <option selected disabled value="">Open this select menu</option>
+                <option th:each="classroom : ${classrooms}"
+                        th:value="${classroom.id_class}"
+                        th:text="${classroom.class_name}" value="">
+                </option>
+            </select>
+        </div>
+        <button style="padding: 5px 30px;align-items: center; display: flex; margin: 0 auto" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</th:block>
+
+</html>
